@@ -23,16 +23,24 @@
                 },
                 {
                     "pos": [64, 64],
-                    "size": [128, 128]
+                    "size": [64, 64]
                 }
             ]
+        }
+    ],
+
+    "metrics": [
+        {
+            "type": "map",
+            "metric": "smape",
+            "groups": [ "testgroup1" ]
         }
     ],
 
     "outputs": [
         {
             "type": "images",
-            "group": "testgroup1"
+            "groups": [ "testgroup1" ]
         }
     ]
 }
