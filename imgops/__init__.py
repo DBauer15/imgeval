@@ -1,9 +1,12 @@
 import imgops.crop
+import imgops.tonemap
 
 def compute_group(group, imageop):
     compute_imageop_fn = None
     if imageop["type"] == "crop":
         compute_imageop_fn = imgops.crop.compute_imageop
+    elif imageop["type"] == "tonemap":
+        compute_imageop_fn = imgops.tonemap.compute_imageop
     
     baseline = group["baseline"]
     result = compute_imageop_fn(imageop, baseline["data"])
