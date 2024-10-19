@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-import imgops.io
+import util.io
 import metrics.imgmap
 import metrics.aggregate
 import json
@@ -19,7 +19,7 @@ def find_group(config, name):
 
 def process_inputs(config):
     for group in config["inputs"]:
-        imgops.io.load_group(group)
+        util.io.load_group(group)
 
 def process_metrics(config):
     for metric in config["metrics"]:
@@ -38,15 +38,15 @@ def process_outputs(config):
             if group == None:
                 continue
             if output["type"] == "images":
-                imgops.io.save_group(group)
+                util.io.save_group(group)
             if output["type"] == "metrics":
-                imgops.io.save_metrics(group)
+                util.io.save_metrics(group)
                     
 
 
 if __name__ == "__main__":
     args = parse_args()
-    imgops.io.BASEDIR = args.outdir
+    util.io.BASEDIR = args.outdir
 
     config = {}
     with open(args.config) as configfile:

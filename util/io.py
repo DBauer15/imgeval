@@ -1,7 +1,7 @@
 import os
 import pyexr
 
-from imgops.crop import *
+from util.crop import *
 
 BASEDIR = './'
 
