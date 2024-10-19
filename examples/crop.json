@@ -15,17 +15,22 @@
                     "name": "Ours",
                     "path": "./data/result_8spp.exr"
                 }
-            ],
-            "crops": [
-                {
-                    "pos": [128, 128],
-                    "size": [64, 64]
-                },
-                {
-                    "pos": [64, 64],
-                    "size": [64, 64]
-                }
             ]
+        }
+    ],
+
+    "imageops": [
+        {
+            "type": "crop",
+            "groups": [ "testgroup1" ],
+            "pos": [128, 128],
+            "size": [64, 64]
+        },
+        {
+            "type": "crop",
+            "groups": [ "testgroup1" ],
+            "pos": [64, 64],
+            "size": [64, 64]
         }
     ],
 
@@ -33,6 +38,11 @@
         {
             "type": "map",
             "metric": "smape",
+            "groups": [ "testgroup1" ]
+        },
+        {
+            "type": "map",
+            "metric": "mse",
             "groups": [ "testgroup1" ]
         }
     ],

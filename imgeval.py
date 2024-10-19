@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 import util.io
-import metrics.imgmap
-import metrics.aggregate
+import metrics
+import imgops
 import json
 
 
@@ -21,14 +21,21 @@ def process_inputs(config):
     for group in config["inputs"]:
         util.io.load_group(group)
 
+def process_imageops(config):
+    for imageop in config["imageops"]:
+        for groupname in imageop["groups"]:
+            group = find_group(config, groupname)
+            if group == None:
+                continue
+            imgops.compute_group(group, imageop)
+
 def process_metrics(config):
     for metric in config["metrics"]:
         for groupname in metric["groups"]:
             group = find_group(config, groupname)
             if group == None:
                 continue
-            metrics.imgmap.compute_group(group, metric)
-            metrics.aggregate.compute_group(group, metric)
+            metrics.compute_group(group, metric)
 
 
 def process_outputs(config):
@@ -55,5 +62,6 @@ if __name__ == "__main__":
     # print(json.dumps(config, indent=2))
 
     process_inputs(config)
+    process_imageops(config)
     process_metrics(config)
     process_outputs(config)

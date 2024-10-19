@@ -41,16 +41,3 @@ def compute_metric(metric, img0, img1):
         return ssim(img0, img1)
     elif (metric == "flip"):
         return flip(img0, img1)
-
-def compute_group(group, metric):
-    if (metric["type"] != "aggregate"):
-        return
-    
-    baseline = group["baseline"]["data"]
-    for image in group["images"]:
-        result = compute_metric(metric["metric"], image["data"], baseline)
-        if "metrics" not in image:
-            image["metrics"] = []
-
-        image["metrics"].append(metric.copy())
-        image["metrics"][-1]["data"] = result
