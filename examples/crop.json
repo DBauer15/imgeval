@@ -1,0 +1,38 @@
+{
+    "inputs": [
+        {
+            "name": "testgroup1",
+            "baseline": {
+                "name": "GT",
+                "path": "./data/result_41spp.exr"
+            },
+            "images": [
+                {
+                    "name": "PathTracing",
+                    "path": "./data/result_1spp.exr"
+                },
+                {
+                    "name": "Ours",
+                    "path": "./data/result_8spp.exr"
+                }
+            ],
+            "crops": [
+                {
+                    "pos": [128, 128],
+                    "size": [64, 64]
+                },
+                {
+                    "pos": [64, 64],
+                    "size": [128, 128]
+                }
+            ]
+        }
+    ],
+
+    "outputs": [
+        {
+            "type": "images",
+            "group": "testgroup1"
+        }
+    ]
+}
