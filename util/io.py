@@ -19,6 +19,14 @@ def load_group(group):
     for image in group["images"]:
         image["data"] = load_img(image["path"])
 
+def save_svg(svg, path):
+    with open(os.path.join(BASEDIR, path), "w") as file:
+        file.write(svg)
+
+def save_pdf(pdf, path):
+    with open(os.path.join(BASEDIR, path), "wb") as file:
+        file.write(pdf)
+
 def save_img(img, path):
     pyexr.write(os.path.join(BASEDIR, path), img)
 
@@ -48,3 +56,9 @@ def save_group(group):
                     continue
                 metricpath = os.path.join(imgpath, f"{metric['metric']}")
                 save_img(metric["data"], f"{metricpath}.exr")
+
+def save_layout(layout):
+    layoutpath = os.path.join("layouts", layout["type"])
+    make_dir(layoutpath)
+
+    save_svg(layout["data"], os.path.join(layoutpath, f"{layout["name"]}.svg"))

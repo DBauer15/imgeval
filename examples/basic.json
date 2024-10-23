@@ -14,6 +14,14 @@
                 {
                     "name": "Ours",
                     "path": "./data/result_8spp.exr"
+                },
+                {
+                    "name": "Another",
+                    "path": "./data/result_32spp.exr"
+                },
+                {
+                    "name": "Unknown",
+                    "path": "./data/result_16spp.exr"
                 }
             ]
         }
@@ -24,14 +32,30 @@
             "type": "crop",
             "groups": [ "testgroup1" ],
             "pos": [128, 128],
-            "size": [64, 64]
+            "size": [64, 64],
+            "color": "#FF0000"
         },
         {
             "type": "crop",
             "groups": [ "testgroup1" ],
             "pos": [64, 64],
-            "size": [64, 64]
+            "size": [64, 64],
+            "color": "#FFAA00"
         },
+        {
+            "type": "crop",
+            "groups": [ "testgroup1" ],
+            "pos": [192, 12],
+            "size": [16, 16],
+            "color": "#0000FF"
+        },     
+        {
+            "type": "crop",
+            "groups": [ "testgroup1" ],
+            "pos": [12, 12],
+            "size": [32, 32],
+            "color": "#AA00FF"
+        },  
         {
             "type": "tonemap",
             "groups": [ "testgroup1" ],
@@ -51,11 +75,26 @@
             "groups": [ "testgroup1" ]
         }
     ],
+    
+    "layouts": [
+        {
+            "name": "Vertical_Spotlight",
+            "type": "vertical",
+            "groups": [ "testgroup1" ],
+            "padding": {
+                "section": 5,
+                "item": 5
+            }
+        }
+    ],
 
     "outputs": [
         {
             "type": "images",
             "groups": [ "testgroup1" ]
+        },
+        {
+            "type": "layouts"
         }
     ]
 }
