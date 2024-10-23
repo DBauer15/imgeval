@@ -4,6 +4,11 @@ A small collections of tools, metrics, and operations that I use for my research
 
 
 ### Installation
+Install and activate the conda environment 
+```bash
+conda env create -f environment.yml
+conda activate imgeval
+```
 
 ### Running
 To run the processing pipeline, simply call it with a config file that contains your settings and content.
