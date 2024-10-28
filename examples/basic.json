@@ -45,15 +45,15 @@
         {
             "type": "crop",
             "groups": [ "testgroup1" ],
-            "pos": [192, 12],
+            "pos": [240, 240],
             "size": [16, 16],
             "color": "#0000FF"
         },     
         {
             "type": "crop",
             "groups": [ "testgroup1" ],
-            "pos": [12, 12],
-            "size": [32, 32],
+            "pos": [0, 0],
+            "size": [256, 256],
             "color": "#AA00FF"
         },  
         {
@@ -78,12 +78,20 @@
     
     "layouts": [
         {
-            "name": "Vertical_Spotlight",
+            "name": "Vertical0",
             "type": "vertical",
             "groups": [ "testgroup1" ],
             "padding": {
                 "section": 5,
-                "item": 5
+                "top": 0
+            }
+        },
+        {
+            "name": "Horizontal0",
+            "type": "horizontal",
+            "groups": [ "testgroup1" ],
+            "padding": {
+                "section": 5,
             }
         }
     ],
