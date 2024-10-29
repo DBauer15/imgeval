@@ -126,6 +126,7 @@ def compute_layout(layout, config):
     plot_crop_bboxes(crops[-1], fig, layout_dims, padding)
 
     plt.subplots_adjust(left=padding[2]/100, right=1-(padding[3]/100), top=1-(padding[0]/100), bottom=padding[1]/100, wspace=0, hspace=0)
-    plt.savefig('test.png')
 
-    return get_figure_data()
+    data = get_figure_data()
+    plt.clf()
+    return data

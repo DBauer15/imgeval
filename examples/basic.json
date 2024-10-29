@@ -13,11 +13,11 @@
                 },
                 {
                     "name": "Ours",
-                    "path": "./data/result_8spp.exr"
+                    "path": "./data/result_18spp.exr"
                 },
                 {
                     "name": "Another",
-                    "path": "./data/result_32spp.exr"
+                    "path": "./data/result_8spp.exr"
                 },
                 {
                     "name": "Unknown",
@@ -32,28 +32,21 @@
             "type": "crop",
             "groups": [ "testgroup1" ],
             "pos": [128, 128],
-            "size": [64, 64],
+            "size": [32, 32],
             "color": "#FF0000"
         },
         {
             "type": "crop",
             "groups": [ "testgroup1" ],
             "pos": [64, 64],
-            "size": [64, 64],
+            "size": [32, 32],
             "color": "#FFAA00"
         },
         {
             "type": "crop",
             "groups": [ "testgroup1" ],
-            "pos": [240, 240],
-            "size": [16, 16],
-            "color": "#0000FF"
-        },     
-        {
-            "type": "crop",
-            "groups": [ "testgroup1" ],
-            "pos": [0, 0],
-            "size": [256, 256],
+            "pos": [128, 12],
+            "size": [32, 32],
             "color": "#AA00FF"
         },  
         {
@@ -73,25 +66,26 @@
             "type": "map",
             "metric": "mse",
             "groups": [ "testgroup1" ]
+        },
+        {
+            "type": "aggregate",
+            "metric": "mse",
+            "groups": [ "testgroup1" ]
+        },
+        {
+            "type": "aggregate",
+            "metric": "psnr",
+            "groups": [ "testgroup1" ]
         }
     ],
     
     "layouts": [
         {
-            "name": "Vertical0",
-            "type": "vertical",
-            "groups": [ "testgroup1" ],
-            "padding": {
-                "section": 5,
-                "top": 0
-            }
-        },
-        {
             "name": "Horizontal0",
             "type": "horizontal",
             "groups": [ "testgroup1" ],
+            "figsize": [10.0, 3.8],
             "padding": {
-                "section": 5,
             }
         }
     ],
