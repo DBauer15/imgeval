@@ -17,3 +17,10 @@ def compute_group(group, metric):
 
         image["metrics"].append(metric.copy())
         image["metrics"][-1]["data"] = result
+    result = compute_metric_fn(metric["metric"], baseline, baseline)
+    if "metrics" not in group["baseline"]:
+        group["baseline"]["metrics"] = []
+
+    group["baseline"]["metrics"].append(metric.copy())
+    group["baseline"]["metrics"][-1]["data"] = result
+    
