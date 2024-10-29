@@ -1,6 +1,8 @@
 import metrics.imgmap as imgmap
 import numpy as np
 import skimage.metrics as skm
+import skimage.color as skc
+
 
 def mae(img0, img1):
     return np.mean(imgmap.mae(img0, img1))
@@ -20,7 +22,7 @@ def psnr(img0, img1):
     
 def ssim(img0, img1):
     range = np.max(img1) - np.min(img1)
-    return skm.structural_similarity(img0, img1, data_range=range)
+    return skm.structural_similarity(skc.rgb2gray(img0), skc.rgb2gray(img1), data_range=range)
 
 def flip(img0, img1):
     raise "FLIP not implemented"
