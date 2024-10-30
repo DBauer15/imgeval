@@ -79,7 +79,7 @@ def plot_reference(image, crops, fig, title):
         )
         fig.patches.append(rect)
 
-def plot_crops(crops, fig, titles):
+def plot_crops(crops, fig):
     axs = fig.subplots(1, len(crops))
     for ax, crop in zip(axs, crops):
         ax.axis("off")
@@ -137,12 +137,11 @@ def compute_layout(layout, config):
 
     plot_reference(group["baseline"], crops[0], fgs[1][0], group["name"])
     for i, fig in enumerate(crop_fgs):
-        plot_crops([crop[i] for crop in crops], fig, [image["name"] for image in images] if i == 0 else None)
+        plot_crops([crop[i] for crop in crops], fig)
     plot_crops_titles([image["name"] for image in images], crop_title_fig)
     plot_crops_metrics([image["metrics"] for image in images], crop_metrics_fig)
 
     # plt.subplots_adjust(left=padding[2]/100, right=1-(padding[3]/100), top=1-(padding[0]/100), bottom=padding[1]/100, wspace=0, hspace=0)
-    plt.savefig("test.png")
     data = get_figure_data()
     plt.clf()
     return data
