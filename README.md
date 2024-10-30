@@ -1,5 +1,5 @@
 # Image Evaluation Tools
-
+![Teaser](./img/teaser.png)
 A small collections of tools, metrics, and operations that I use for my research. The app read json configs to read images, crop areas, compute image metrics, and arrange them in useful layouts.
 
 
