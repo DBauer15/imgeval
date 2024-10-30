@@ -10,46 +10,6 @@ def get_figure_data():
     plt.savefig(bytestream, format="svg")
     return bytestream.getvalue()
 
-# def get_image_data(image):
-#     img = [op["data"] for op in image["imageops"] if op["type"] == "tonemap"]
-#     if len(img) > 0:
-#         img = img[0]
-#     else:
-#         img = image["data"]
-#     return img
-
-
-# def calculate_layout_dimensions(image, crops, layout):
-#     # TODO: User section padding and item padding
-#     section_padding = layout["padding"].get("section", 0)
-#     padding_top = layout["padding"].get("top", 0)
-#     padding_bottom = layout["padding"].get("bottom", 0)
-#     padding_left = layout["padding"].get("left", 0)
-#     padding_right = layout["padding"].get("right", 0)
-
-#     num_crops = len(crops[0])
-#     crop_height, crop_width = (0, 0)
-#     for crop in crops:
-#         crop_height = max(crop_height, crop[0]["data"].shape[0])
-#         crop_width = max(crop_width, crop[0]["data"].shape[1])
-
-#     image_height, image_width, _ = image["data"].shape
-#     width_ratios = [ image_width ] + [ image_width ]
-#     print(width_ratios, image_width, crop_width)
-
-#     crop_scale = crop_width / (crop_width * len(crops[0]))
-#     crop_height, crop_width = crop_height * crop_scale, crop_width * crop_scale
-
-#     layout_height = image["data"].shape[0]
-#     layout_width = image["data"].shape[1] + ( section_padding + crop_width ) * num_crops
-    
-#     layout_dims = [ layout_height, layout_width ]
-
-
-#     padding = [ padding_top, padding_bottom, padding_left, padding_right ]
-
-#     return layout_dims, width_ratios, padding
-
 def plot_reference(image, crops, fig, title):
     ax = fig.subplots(1)
     ax.set_ylabel(title, fontsize="12")
@@ -121,7 +81,8 @@ def compute_layout(layout, config):
 
     fig = plt.figure(1,
             figsize=layout["figsize"],
-            layout="constrained"
+            layout="constrained",
+            clear=True
     )
     fgs = fig.subfigures(nrows=3,
                          ncols=2,
@@ -141,7 +102,7 @@ def compute_layout(layout, config):
     plot_crops_titles([image["name"] for image in images], crop_title_fig)
     plot_crops_metrics([image["metrics"] for image in images], crop_metrics_fig)
 
-    # plt.subplots_adjust(left=padding[2]/100, right=1-(padding[3]/100), top=1-(padding[0]/100), bottom=padding[1]/100, wspace=0, hspace=0)
     data = get_figure_data()
     plt.clf()
+    plt.close()
     return data
