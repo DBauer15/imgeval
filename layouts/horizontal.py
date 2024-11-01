@@ -99,7 +99,9 @@ def compute_layout(layout, config):
     plot_reference(group["baseline"], crops[0], fgs[1][0], group["name"])
     for i, fig in enumerate(crop_fgs):
         plot_crops([crop[i] for crop in crops], fig)
-    plot_crops_titles([image["name"] for image in images], crop_title_fig)
+
+    if not layout.get("hide_titles", False):
+        plot_crops_titles([image["name"] for image in images], crop_title_fig)
     plot_crops_metrics([image["metrics"] for image in images], crop_metrics_fig)
 
     data = get_figure_data()
