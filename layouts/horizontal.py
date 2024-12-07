@@ -5,11 +5,6 @@ import matplotlib.patches as patches
 
 import util.config
 
-def get_figure_data():
-    bytestream = io.StringIO()
-    plt.savefig(bytestream, format="svg")
-    return bytestream.getvalue()
-
 def plot_reference(image, crops, fig, title):
     ax = fig.subplots(1)
     ax.set_ylabel(title, fontsize="12")
@@ -104,7 +99,8 @@ def compute_layout(layout, config):
         plot_crops_titles([image["name"] for image in images], crop_title_fig)
     plot_crops_metrics([image["metrics"] for image in images], crop_metrics_fig)
 
-    data = get_figure_data()
+    data_svg = util.config.get_figure_data("svg")
+    data_pdf = util.config.get_figure_data("pdf")
     plt.clf()
     plt.close()
-    return data
+    return [ data_svg, data_pdf ]

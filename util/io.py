@@ -61,4 +61,5 @@ def save_layout(layout):
     layoutpath = os.path.join("layouts", layout["type"])
     make_dir(layoutpath)
 
-    save_svg(layout["data"], os.path.join(layoutpath, f"{layout["name"]}.svg"))
+    save_svg(layout["data"][0], os.path.join(layoutpath, f"{layout["name"]}.svg"))
+    save_pdf(layout["data"][1], os.path.join(layoutpath, f"{layout["name"]}.pdf"))
