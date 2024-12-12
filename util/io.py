@@ -1,5 +1,6 @@
 import os
 import pyexr
+import matplotlib.pyplot as plt
 
 from imgops.crop import *
 
@@ -33,7 +34,10 @@ def save_pdf(pdf, path):
         file.write(pdf)
 
 def save_img(img, path):
-    pyexr.write(os.path.join(BASEDIR, path), img)
+    if path.endswith(".exr"):
+        pyexr.write(os.path.join(BASEDIR, path), img)
+    if path.endswith(".png") or path.endswith(".jpg"):
+        plt.imsave(os.path.join(BASEDIR, path), img.clip(0, 1))
 
 def save_group(group):
     imgpath = os.path.join(group["name"], group["baseline"]["name"])
@@ -44,6 +48,7 @@ def save_group(group):
         for i, op in enumerate(group["baseline"]["imageops"]):
             oppath = os.path.join(imgpath, f"op{i}_{op["type"]}")
             save_img(op["data"], f"{oppath}.exr")
+            save_img(op["data"], f"{oppath}.png")
 
     for image in group["images"]:
         imgpath = os.path.join(group["name"], image["name"])
@@ -54,6 +59,7 @@ def save_group(group):
             for i, op in enumerate(image["imageops"]):
                 oppath = os.path.join(imgpath, f"op{i}_{op["type"]}")
                 save_img(op["data"], f"{oppath}.exr")
+                save_img(op["data"], f"{oppath}.png")
         
         if "metrics" in image:
             for i, metric in enumerate(image["metrics"]):

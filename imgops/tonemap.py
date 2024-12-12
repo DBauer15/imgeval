@@ -20,10 +20,10 @@ def filmic(img):
 
 def compute_imageop(imageop, image):
     if imageop["method"] == "linear":
-        return linear(image)
+        return linear(image[..., :3])
     if imageop["method"] == "reinhard":
-        return reinhard(image)
+        return reinhard(image[..., :3])
     if imageop["method"] == "exposure":
-        return exposure(image, imageop["exposure"])
+        return exposure(image[..., :3], imageop["exposure"])
     if imageop["method"] == "filmic":
-        return filmic(image)
+        return filmic(image[..., :3])
