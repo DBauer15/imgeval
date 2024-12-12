@@ -4,6 +4,7 @@ import pyexr
 from imgops.crop import *
 
 BASEDIR = './'
+INDIR = './'
 
 def make_dir(path):
     path = os.path.join(BASEDIR, path)
@@ -11,8 +12,12 @@ def make_dir(path):
         os.makedirs(path)
 
 def load_img(path):
-    with pyexr.open(path) as file:
-        return file.get()
+    try:
+        with pyexr.open(path) as file:
+            return file.get()
+    except:
+        with pyexr.open(os.path.abspath(os.path.join(INDIR, path))) as file:
+            return file.get()
 
 def load_group(group):
     group["baseline"]["data"] = load_img(group["baseline"]["path"])

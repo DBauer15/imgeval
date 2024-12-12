@@ -11,6 +11,7 @@ def parse_args():
     parser = ArgumentParser()
     parser.add_argument("config", type=str, help="The config file to process")
     parser.add_argument("-o", "--outdir", type=str, default="./", help="The output dir to write to")
+    parser.add_argument("-i", "--indir", type=str, default="./", help="The input dir to read relative from")
     return parser.parse_args()
 
 def process_inputs(config):
@@ -56,6 +57,7 @@ def process_outputs(config):
 if __name__ == "__main__":
     args = parse_args()
     util.io.BASEDIR = args.outdir
+    util.io.INDIR = args.indir
 
     config = {}
     with open(args.config) as configfile:
