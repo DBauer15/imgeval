@@ -1,4 +1,5 @@
 import io
+import imgops.tonemap as tonemap
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
@@ -12,7 +13,7 @@ def plot_reference(image, crops, fig, title):
     ax.set_xticks([])
 
     # plot image
-    ax.imshow(image["data"], interpolation="none", aspect="equal")
+    ax.imshow(tonemap.exposure(image["data"][..., :3], 2.2), interpolation="none", aspect="equal", vmin=0.0, vmax=1.0)
 
     # plot crop bboxes
     image_height, image_width, _ = image["data"].shape
@@ -40,7 +41,7 @@ def plot_crops(crops, fig):
         ax.axis("off")
 
         # plot image
-        ax.imshow(crop["data"], interpolation="none", aspect="equal")
+        ax.imshow(tonemap.exposure(crop["data"][..., :3], 2.2), interpolation="none", aspect="equal", vmin=0.0, vmax=1.0)
 
         # plot crop border
         rect = patches.Rectangle(
@@ -82,7 +83,7 @@ def compute_layout(layout, config):
     fgs = fig.subfigures(nrows=3,
                          ncols=2,
                          height_ratios=[0.05, 1, 0.1],
-                         width_ratios=[1, 1.8]
+                         width_ratios=[1, 0.6]
                          )
     crop_title_fig = fgs[0][1].subfigures(nrows=1,
                                          ncols=1)
