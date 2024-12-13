@@ -1,4 +1,5 @@
 import io
+import imgops.tonemap as tonemap
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
@@ -29,7 +30,7 @@ def plot_slices(images, crops, fig):
         slice_img[:, start:end] = image["data"][:, start:end]
         
     ax.axis("off")
-    ax.imshow(slice_img, interpolation="none", aspect="equal")
+    ax.imshow(tonemap.exposure(slice_img[..., :3], 2.2), interpolation="none", aspect="equal")
 
     # Plot dividers between slices
     for i in range(len(images)):
@@ -70,7 +71,7 @@ def plot_crops(crops, fig):
         ax.axis("off")
 
         # plot image
-        ax.imshow(crop["data"], interpolation="none")
+        ax.imshow(tonemap.exposure(crop["data"][..., :3], 2.2), interpolation="none")
 
         # plot crop border
         rect = patches.Rectangle(
@@ -94,8 +95,8 @@ def plot_crops_metrics(metrics, fig):
 
 def compute_layout(layout, config):
     group = util.config.find_group(config, layout["groups"][0])
-    images =  [image for image in group["images"]] + [group["baseline"]]
-    crops = [[op for op in image["imageops"] if op["type"] == "crop"] for image in group["images"]] + [[op for op in group["baseline"]["imageops"] if op["type"] == "crop"]]
+    images =  [image for image in group["images"]] #+ [group["baseline"]]
+    crops = [[op for op in image["imageops"] if op["type"] == "crop"] for image in group["images"]] #+ [[op for op in group["baseline"]["imageops"] if op["type"] == "crop"]]
 
     fig = plt.figure(1,
                      figsize=layout["figsize"],
@@ -104,7 +105,7 @@ def compute_layout(layout, config):
     )
     fgs = fig.subfigures(nrows=4,
                          ncols=1,
-                         height_ratios=[0.1, 1, 1.2, 0.1],
+                         height_ratios=[0.1, 1, 0.47, 0.1],
     )
 
     crop_fgs = fgs[2].subfigures(nrows=1,
@@ -116,7 +117,9 @@ def compute_layout(layout, config):
     plot_slices(images, crops, fgs[1])
     for i, crop_fig in enumerate(crop_fgs):
         plot_crops(crops[i], crop_fig)
-    plot_crops_metrics([image["metrics"] for image in images], crop_metrics_fig)
+    
+    if "metrics" in images[0]:
+        plot_crops_metrics([image["metrics"] for image in images], crop_metrics_fig)
 
     data_svg = util.config.get_figure_data("svg")
     data_pdf = util.config.get_figure_data("pdf")

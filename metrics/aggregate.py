@@ -14,7 +14,7 @@ def rmse(img0, img1):
     return np.mean(imgmap.rmse(img0, img1))
 
 def smape(img0, img1):
-    return np.mean(imgmap.rmse(img0, img1))
+    return np.mean(imgmap.smape(img0, img1))
 
 def psnr(img0, img1):
     range = np.max(img1) - np.min(img1)
