@@ -22,7 +22,7 @@ def psnr(img0, img1):
     
 def ssim(img0, img1):
     range = np.max(img1) - np.min(img1)
-    return skm.structural_similarity(skc.rgb2gray(img0), skc.rgb2gray(img1), data_range=range)
+    return skm.structural_similarity(skc.rgb2gray(img0[...,:3]), skc.rgb2gray(img1[...,:3]), data_range=range)
 
 def flip(img0, img1):
     raise "FLIP not implemented"

@@ -75,6 +75,14 @@ def compute_layout(layout, config):
     images = group["images"] + [group["baseline"]]
     crops = [([op for op in image["imageops"] if op["type"] == "crop"]) for image in images]
 
+    height_ratios = [0.05, 1, 0.1]
+    if "height_ratios" in layout:
+        height_ratios = layout["height_ratios"]
+
+    width_ratios = [1, 0.6]
+    if "width_ratios" in layout:
+        width_ratios = layout["width_ratios"]
+
     fig = plt.figure(1,
             figsize=layout["figsize"],
             layout="constrained",
@@ -82,8 +90,8 @@ def compute_layout(layout, config):
     )
     fgs = fig.subfigures(nrows=3,
                          ncols=2,
-                         height_ratios=[0.05, 1, 0.1],
-                         width_ratios=[1, 0.6]
+                         height_ratios=height_ratios,
+                         width_ratios=width_ratios
                          )
     crop_title_fig = fgs[0][1].subfigures(nrows=1,
                                          ncols=1)
